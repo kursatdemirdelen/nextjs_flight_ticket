@@ -83,19 +83,19 @@ export default function Home() {
     const errors: { [key: string]: string } = {};
     selectedSeats.forEach((seat, index) => {
       const passengerPrefix = `passenger-${index}`;
-      const name = (document.getElementById(`${passengerPrefix}-name`) as HTMLInputElement).value;
-      const surname = (document.getElementById(`${passengerPrefix}-surname`) as HTMLInputElement).value;
-      const phone = (document.getElementById(`${passengerPrefix}-phone`) as HTMLInputElement).value;
-      const email = (document.getElementById(`${passengerPrefix}-email`) as HTMLInputElement).value;
-      const gender = (document.getElementById(`${passengerPrefix}-gender`) as HTMLInputElement).value;
-      const birthdate = (document.getElementById(`${passengerPrefix}-birthdate`) as HTMLInputElement).value;
+      const nameInput = document.getElementById(`${passengerPrefix}-name`) as HTMLInputElement;
+      const surnameInput = document.getElementById(`${passengerPrefix}-surname`) as HTMLInputElement;
+      const phoneInput = document.getElementById(`${passengerPrefix}-phone`) as HTMLInputElement;
+      const emailInput = document.getElementById(`${passengerPrefix}-email`) as HTMLInputElement;
+      const genderInput = document.getElementById(`${passengerPrefix}-gender`) as HTMLInputElement;
+      const birthdateInput = document.getElementById(`${passengerPrefix}-birthdate`) as HTMLInputElement;
 
-      if (!name) errors[`${passengerPrefix}-name`] = "İsim gerekli";
-      if (!surname) errors[`${passengerPrefix}-surname`] = "Soyisim gerekli";
-      if (!phone) errors[`${passengerPrefix}-phone`] = "Telefon gerekli";
-      if (!email) errors[`${passengerPrefix}-email`] = "E-Posta gerekli";
-      if (!gender) errors[`${passengerPrefix}-gender`] = "Cinsiyet gerekli";
-      if (!birthdate) errors[`${passengerPrefix}-birthdate`] = "Doğum Tarihi gerekli";
+      if (!nameInput?.value) errors[`${passengerPrefix}-name`] = "İsim gerekli";
+      if (!surnameInput?.value) errors[`${passengerPrefix}-surname`] = "Soyisim gerekli";
+      if (!phoneInput?.value) errors[`${passengerPrefix}-phone`] = "Telefon gerekli";
+      if (!emailInput?.value) errors[`${passengerPrefix}-email`] = "E-Posta gerekli";
+      if (!genderInput?.value) errors[`${passengerPrefix}-gender`] = "Cinsiyet gerekli";
+      if (!birthdateInput?.value) errors[`${passengerPrefix}-birthdate`] = "Doğum Tarihi gerekli";
     });
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
