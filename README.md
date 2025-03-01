@@ -75,7 +75,7 @@ You can customize the application by modifying the components and styles in the 
 
 ## 📸 Screenshot
 
-![Screenshot](https://hizliresim.com/54lwg3x)
+[![Image](https://i.hizliresim.com/54lwg3x.png)](https://hizliresim.com/54lwg3x)
 
 ## 📚 Learn More
 
