@@ -75,7 +75,8 @@ You can customize the application by modifying the components and styles in the 
 
 ## 📸 Screenshot
 
-[![Image](https://i.hizliresim.com/54lwg3x.png)](https://hizliresim.com/54lwg3x)
+![Screenshot]([https://assets.digitalocean.com/articles/alligator/boo.svg](https://i.hizliresim.com/54lwg3x.png?_gl=1*z5xxs5*_ga*MTk3MjA1MDM1OC4xNzM0MDQ1MTAw*_ga_M9ZRXYS2YN*MTc0MDgwMzI0MC4yLjEuMTc0MDgwMzQwOS42MC4wLjA.) )
+
 
 ## 📚 Learn More
 
