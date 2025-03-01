@@ -1,95 +1,124 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+
+  const toggleAccordion = (index: number) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  const toggleSeatSelection = (seat: string) => {
+    setSelectedSeats((prevSelectedSeats) =>
+      prevSelectedSeats.includes(seat)
+        ? prevSelectedSeats.filter((s) => s !== seat)
+        : [...prevSelectedSeats, seat]
+    );
+  };
+
+  const totalPrice = selectedSeats.length * 1000;  
+
+  const renderSeats = () => {
+  const seats = [];
+  for (let row = 1; row <= 19; row++) {
+    for (let col = 1; col <= 4; col++) {
+      if (col === 3) { 
+        seats.push(<div key={`spacer-${row}`} className={styles.spacer}></div>);
+      }
+
+      const seat = `${row}${String.fromCharCode(64 + col)}`;
+      seats.push(
+        <button
+          key={seat}
+          className={`${styles.seatButton} ${
+            selectedSeats.includes(seat) ? styles.selected : ""
+          }`}
+          onClick={() => toggleSeatSelection(seat)}
+        />
+      );
+    }
+  }
+  return seats;
+};
+
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        <div className={styles.columns}>
+          <div className={styles.leftColumn}>
+            <div className={styles.imageWrapper}>
+              <Image src="/ucak.png" alt="Flight" className={styles.image} layout="responsive" width={900} height={1200} />
+             <div className={styles.seatWrapper}>
+              <div className={styles.seatMap}>
+                {renderSeats()}
+              </div></div>
+            </div>
+          </div>
+          <div className={styles.rightColumn}>
+            {[1, 2, 3].map((passenger, index) => (
+              <div
+                key={passenger}
+                className={`${styles.passengerCard} ${activeIndex === index ? styles.active : ""}`}
+              >
+                <div
+                  className={styles.passengerHeader}
+                  onClick={() => toggleAccordion(index)}
+                >
+                  {passenger}. Yolcu
+                  <span className={`${styles.arrowIcon} ${activeIndex === index ? styles.active : ""}`}>
+                    
+                  </span>
+                </div>
+                <div className={styles.passengerContent}>
+                  <div className={styles.inputGroup}>
+                    <label>İsim</label>
+                    <input type="text" className={styles.input} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label>Soyisim</label>
+                    <input type="text" className={styles.input} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label>Telefon</label>
+                    <input type="tel" className={styles.input} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label>E-Posta</label>
+                    <input type="email" className={styles.input} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label>Cinsiyet</label>
+                    <input type="text" className={styles.input} />
+                  </div>
+                  <div className={styles.inputGroup}>
+                    <label>Doğum Tarihi</label>
+                    <input type="date" className={styles.input} />
+                  </div>
+                </div>
+              </div>
+            ))}
+            <button className={styles.completeButton}>İşlemleri Tamamla</button>
+            <div className={styles.summarySection}>
+              <div className={styles.selectedSeats}>
+                <ul>
+                  {selectedSeats.map((seat, index) => (
+                    <li key={index}>{seat}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className={styles.seatSummary}>
+                <span>{selectedSeats.length}x</span>
+                <span className={styles.seat}></span>
+                <span className={styles.price}>{totalPrice} TL</span>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
